@@ -8,7 +8,7 @@ from pynput.mouse import Controller
 # Tempo de inatividade para abrir o popup (em segundos)
 IDLE_TIME_THRESHOLD = 5 # 1 minuto
 
-URL = "https://cim.bazei.com.br:8000/consultaProducaoTurnoAtual?tipo_recurso=2"
+URL = ""
 CHROMIUM_COMMAND = ["chromium-browser",
                     "--user-data-dir=/tmp/chromium-popup",  # <-- cria perfil temporário
                     "--no-default-browser-check",
