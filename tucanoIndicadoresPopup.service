@@ -1,0 +1,14 @@
+[Unit]
+Description=Indicador de metas - Popup automático
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 /home/pi/tucano/indicadoresTucanoPopup.py
+Restart=always
+Environment=DISPLAY=:0
+Environment=XAUTHORITY=/home/pi/.Xauthority
+User=pi
+
+[Install]
+WantedBy=default.target
