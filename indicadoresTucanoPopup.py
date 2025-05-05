@@ -3,12 +3,22 @@ import subprocess
 import time
 import os
 import signal
+import requests
 from pynput.mouse import Controller
 
-# Tempo de inatividade para abrir o popup (em segundos)
-IDLE_TIME_THRESHOLD = 5 # 1 minuto
+def get_idle_time():
+    try:
+        resposta = requests.get("https://cim.bazei.com.br:8000/tucano/config/idle-time", timeout=5)
+        dados = resposta.json()
+        return int(dados.get("idle_time_seconds", 60))  # default: 60s
+    except Exception as e:
+        print("Erro ao obter tempo de inatividade do servidor:", e)
+        return 60  # fallback padrão
 
-URL = ""
+# Tempo de inatividade para abrir o popup (em segundos)
+IDLE_TIME_THRESHOLD = get_idle_time() # obtem atraves da consulta no servidor
+
+URL = "https://cim.bazei.com.br:8000/consultaProducaoTurnoAtual?tipo_recurso=2&recurso=208"
 CHROMIUM_COMMAND = ["chromium-browser",
                     "--user-data-dir=/tmp/chromium-popup",  # <-- cria perfil temporário
                     "--no-default-browser-check",
