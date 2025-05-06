@@ -18,14 +18,13 @@ def get_idle_time():
 # Tempo de inatividade para abrir o popup (em segundos)
 IDLE_TIME_THRESHOLD = get_idle_time() # obtem atraves da consulta no servidor
 
-URL = "https://cim.bazei.com.br:8000/consultaProducaoTurnoAtual?tipo_recurso=2&recurso=208"
+URL = ""
 CHROMIUM_COMMAND = ["chromium-browser",
                     "--user-data-dir=/tmp/chromium-popup",  # <-- cria perfil temporário
                     "--no-default-browser-check",
                     "--no-first-run",
                     "--start-fullscreen",
-                    "--incognito",
-                    URL]
+                    "--app=" + URL]
 
 popup_process = None
 last_activity_time = time.time()
